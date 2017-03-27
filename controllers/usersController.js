@@ -3,6 +3,8 @@ var router = express.Router();
 
 var User = require("../models/user");
 
+
+// users index route
 router.get('/', function(req, res){
   User.find({})
     .exec(function(err, users){
@@ -14,6 +16,8 @@ router.get('/', function(req, res){
     });
 });
 
+
+// new user creation route
 router.get('/new', function(req, res) {
 	res.render('users/new.hbs')
 });
@@ -30,7 +34,17 @@ router.post('/', function(req, res) {
 	});
 });
 
-
+// show individual user route
+router.get('/:id', function(req, res){
+	User.findById(req.params.id)
+	.exec(function(err, user) {
+		if (err) { console.log(err); }
+		console.log(user);
+		res.render('users/show.hbs', {
+			user: user
+		});
+	});
+});
 
 
 
