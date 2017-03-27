@@ -67,4 +67,17 @@ router.get('/:id/edit', function(req, res){
 	});
 });
 
+// put rout for edit
+router.put('/:id', function(req, res) {
+	User.findByIdAndUpdate(req.params.id, {
+		first_name: req.body.first_name,
+		password: req.body.password
+	}, { new: true })
+	.exec(function(err, user) {
+		if (err) { console.log(err); }
+		console.log(user);
+		res.render('users/show.hbs');
+	});
+});
+
 module.exports = router;
