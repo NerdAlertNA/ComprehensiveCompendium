@@ -56,6 +56,15 @@ router.delete('/:id', function(req, res){
 	});
 });
 
-
+// edit existing user route
+router.get('/:id/edit', function(req, res){
+	User.findById(req.params.id)
+	.exec(function(err, user) {
+		if (err) { console.log(err); }
+		res.render('users/edit', {
+			user: user
+		});
+	});
+});
 
 module.exports = router;
