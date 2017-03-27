@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var usersController = require("./controllers/usersController.js");
 app.use('/users', usersController);
 
-mongoose.connect('mongodb://localhost/comprehensive-compendium');
+mongoose.connect('mongodb://localhost:27017/comprehensive-compendium');
 
 var db = mongoose.connection;
 

@@ -21,12 +21,27 @@ var geralt = new User({
 	password: 'rivia'
 });
 
-var test = new User({
+var noob = new User({
 	username: 'test',
 	first_name: 'passed',
 	password: 'failed'
 });
 
-var users = [jacob, geralt, test];
+var users = [jacob, geralt, noob];
 
-console.log(users);
+
+// jacob.save(function(err) {
+// 		if(err) { console.log(err); }
+
+// 		console.log('user');
+// 	});
+
+
+users.forEach(function(user){
+	user.save(function(err) {
+		if(err) { console.log(err); }
+
+		console.log(user);
+	});
+});
+

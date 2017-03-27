@@ -4,8 +4,8 @@ var Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 
 var UserSchema = new Schema({
-  username: String,
-  password: String,
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
   first_name: String,
   created_at: Date,
   updated_at: Date
