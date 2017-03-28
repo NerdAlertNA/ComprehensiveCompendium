@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var User = require("../models/user");
-var Post = require("../models/component");
+var Component = require("../models/component");
 
 // users index route
 router.get('/', function(req, res){
@@ -82,13 +82,14 @@ router.put('/:id', function(req, res) {
 
 // COMPONENT SECTION
 
+// show user's components route
 router.get('/:id/components', function(req, res){
 	User.findById(req.params.id)
 	.exec(function(err, user){
 		if (err) { console.log(err); }
 		console.log(user.id)
 		console.log(user.components)
-		res.render('components/index.hbs', {
+		res.render('userComponents/index.hbs', {
 			components: user.components,
 			user: user
 		});

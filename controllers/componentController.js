@@ -4,13 +4,15 @@ var router = express.Router();
 var User = require("../models/user");
 var Component = require("../models/component");
 
-router.get('/', function indexComonents(req, res){
-	User.findById(req.params.userId)
-	.exec(function(err, user){
+router.get('/', function(req, res){
+	Component.find({})
+	.exec(function(err, components){
 		if (err) { console.log(err); }
-
+		console.log(components);
 		res.render('components/index.hbs', {
-			user: user
+			components: components
 		});
 	});
 });
+
+module.exports = router;
