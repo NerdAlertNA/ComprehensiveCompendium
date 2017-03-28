@@ -67,7 +67,7 @@ router.get('/:id/edit', function(req, res){
 	});
 });
 
-// put route for edit
+// put route for edit ---^
 router.put('/:id', function(req, res) {
 	User.findByIdAndUpdate(req.params.id, {
 		first_name: req.body.first_name,
@@ -95,5 +95,74 @@ router.get('/:id/components', function(req, res){
 		});
 	});
 });
+
+
+// new component route
+router.get('/:id/new_component', function(req, res){
+	User.findById(req.params.id)
+	.exec(function(err, user){
+		if (err) { console.log(err); }
+		res.render('userComponents/new.hbs', {
+			user: user
+		});
+	});
+});
+
+router.post('/:id/components', function(req, res){
+	User.findById(req.params.id)
+	.exec(function(err, user) {
+		if (err) { console.log(err); }
+		const newComponent = new Component ({
+			title: req.body.title,
+			content: req.body.content
+		});
+
+		newComponent.save(function(err) {
+			if (err) { console.log(err); }
+			console.log('Component saved to db!')
+		});
+
+		user.components.push(newComponent)
+
+		user.save(function(err) {
+			if (err) { console.log(err); }
+			console.log('Component Created!')
+		});
+
+		res.redirect(`/users/${user.id}/components`)
+	});
+});
+
+// router.get('/:id/new_component', function(req, res){
+// 	res.render('userComponents/new.hbs')
+// });
+
+// router.post('/:id/components', function(req, res){
+// 	var component = new Component({
+// 		title: req.body.title,
+// 		content: req.body.content
+// 	});
+// 	components.save(function(err, component){
+// 		if (err) {console.log(err); }
+// 		console.log(component);
+// 		res.redirect('/users/:id/components')
+// 	});
+// });
+
+// router.post('/:id/components', function(req, res) {
+// 	User.findById(req.params.id)
+// 	.exec(function(err, user){
+// 		user.components.push(new Component({
+// 			title: req.body.title,
+// 			content: req.body.content
+// 		}));
+// 		user.save(function(err){
+// 			if (err) { console.log(err); }
+
+// 			res.send(user);
+// 		});
+// 	});
+// });
+
 
 module.exports = router;

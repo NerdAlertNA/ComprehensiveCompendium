@@ -9,7 +9,7 @@ var ComponentSchema = new Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
   created_at: Date,
-  updated_at: Date
+  updated_at: Date,
 });
 
 ComponentSchema.pre('save', function(next){
@@ -40,6 +40,8 @@ UserSchema.pre('save', function(next){
   }
   next();
 });
+
+ComponentSchema.author = UserSchema.username
 
 
 var UserModel = mongoose.model("User", UserSchema);
