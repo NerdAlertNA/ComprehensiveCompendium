@@ -67,7 +67,7 @@ router.get('/:id/edit', function(req, res){
 	});
 });
 
-// put rout for edit
+// put route for edit
 router.put('/:id', function(req, res) {
 	User.findByIdAndUpdate(req.params.id, {
 		first_name: req.body.first_name,
@@ -77,6 +77,21 @@ router.put('/:id', function(req, res) {
 		if (err) { console.log(err); }
 		console.log(user);
 		res.render('users/show.hbs');
+	});
+});
+
+// COMPONENT SECTION
+
+router.get('/:id/components', function(req, res){
+	User.findById(req.params.id)
+	.exec(function(err, user){
+		if (err) { console.log(err); }
+		console.log(user.id)
+		console.log(user.components)
+		res.render('components/index.hbs', {
+			components: user.components,
+			user: user
+		});
 	});
 });
 
