@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var User = require("../models/user");
-
+var Post = require("../models/component");
 
 // users index route
 router.get('/', function(req, res){
