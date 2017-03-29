@@ -17,7 +17,7 @@ var componentController = require("./controllers/componentController");
 app.use('/users', usersController);
 app.use('/components', componentController);
 
-mongoose.connect('mongodb://localhost:27017/comprehensive-compendium');
+mongoose.connect('mongodb://localhost:/comprehensive-compendium');
 
 var db = mongoose.connection;
 
