@@ -17,7 +17,7 @@ var componentController = require("./controllers/componentController");
 app.use('/users', usersController);
 app.use('/components', componentController);
 
-mongoose.connect('mongodb://localhost:/comprehensive-compendium');
+mongoose.connect('mongodb://heroku_1hsslwq7:mo855ii9gifs5gn9fq8q74qrqq@ds043942.mlab.com:43942/heroku_1hsslwq7');
 
 var db = mongoose.connection;
 
@@ -29,7 +29,7 @@ db.once('open', function() {
   console.log("database has been connected!");
 });
 
-app.listen(3000, function(){
-  console.log("Comprehensive Compendium collecting information on port 3000!");
+app.listen(process.env.MONGODB_URI, function(){
+  console.log("Comprehensive Compendium collecting information");
 });
 
