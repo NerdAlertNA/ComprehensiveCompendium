@@ -5,6 +5,7 @@ var methodOverride = require('method-override');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var app = express();
+var port = process.env.PORT || 3000;
 
 app.set('view engine', 'hbs');
 app.use(methodOverride('_method'));
@@ -17,7 +18,7 @@ var componentController = require("./controllers/componentController");
 app.use('/users', usersController);
 app.use('/components', componentController);
 
-mongoose.connect('mongodb://heroku_1hsslwq7:mo855ii9gifs5gn9fq8q74qrqq@ds043942.mlab.com:43942/heroku_1hsslwq7');
+mongoose.connect(process.env.MONGODB_URI);
 
 var db = mongoose.connection;
 
@@ -29,7 +30,7 @@ db.once('open', function() {
   console.log("database has been connected!");
 });
 
-app.listen(process.env.MONGODB_URI, function(){
+app.listen(port, function(){
   console.log("Comprehensive Compendium collecting information");
 });
 
